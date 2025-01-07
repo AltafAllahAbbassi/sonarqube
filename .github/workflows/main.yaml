@@ -48,6 +48,6 @@ jobs:
       # Step 5: Start SonarQube server based on the OS
       - name: Start SonarQube server (Linux)
         run: |
-          chmod +x sonar-application/sonar-*/bin/linux-x86-64/sonar.sh
-          sonar-application/sonar-*/bin/linux-x86-64/sonar.sh start
+          chmod +x sonar-application/sonar*/
+          sonar-application/sonar*/bin/linux-x86-64/sonar.sh start
 
