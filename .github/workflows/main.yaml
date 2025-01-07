@@ -34,10 +34,11 @@ jobs:
 
       # Set up Gradle (ensure the wrapper is used)
       - name: Set up Gradle
-        uses: gradle/wrapper-validation-action@v1
+        uses: gradle/wrapper-validation-action@v2
 
       # Run Gradle build (and tests)
-      - name: Build and test with Gradle
-        run: ./gradlew build
-
+      - name: Build with Gradle
+        run: ./gradlew clean build
+      - name: Test with Gradle
+        run: ./gradlew test
 
