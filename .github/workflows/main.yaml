@@ -13,11 +13,11 @@ jobs:
     runs-on: ubuntu-latest  # Use the latest Ubuntu runner
 
     steps:
-      # Checkout the code from the repository
+      # Step 1: Checkout the code from the repository
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Set up JDK 17
+      # Step 2: Setup java and gradle
       - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
@@ -32,13 +32,22 @@ jobs:
           job-status: success
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      # Set up Gradle (ensure the wrapper is used)
       - name: Set up Gradle
         uses: gradle/wrapper-validation-action@v2
 
-      # Run Gradle build (and tests)
+      # Step3: Run build and test (includes creating the distribution ZIP)
       - name: Build with Gradle
         run: ./gradlew clean build
-      - name: Test with Gradle
-        run: ./gradlew test
+
+      # Step : Unzip the SonarQube distribution file
+      - name: Unzip SonarQube distribution
+        run: |
+          mkdir -p sonar-application
+          unzip sonar-application/build/distributions/sonar-*.zip -d sonar-application
+
+      # Step 5: Start SonarQube server based on the OS
+      - name: Start SonarQube server (Linux)
+        run: |
+          chmod +x sonar-application/sonar-*/bin/linux-x86-64/sonar.sh
+          sonar-application/sonar-*/bin/linux-x86-64/sonar.sh start
 
