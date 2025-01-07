@@ -32,21 +32,12 @@ jobs:
           job-status: success
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      # Cache Gradle dependencies to speed up subsequent builds
-      - name: Cache Gradle dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-
       # Set up Gradle (ensure the wrapper is used)
       - name: Set up Gradle
         uses: gradle/wrapper-validation-action@v1
 
       # Run Gradle build (and tests)
       - name: Build and test with Gradle
-        run: ./gradlew clean build
+        run: ./gradlew build
 
 
