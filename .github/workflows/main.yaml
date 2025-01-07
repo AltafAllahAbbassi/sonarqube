@@ -3,10 +3,10 @@ name: CI Pipeline for Multi-Module Gradle Project
 on:
   push:
     branches:
-      - master  # Trigger the pipeline for pushes to the 'main' branch
+      - master  # Trigger the pipeline for pushes to the 'master' branch
   pull_request:
     branches:
-      - master  # Trigger the pipeline for pull requests targeting 'main'
+      - master  # Trigger the pipeline for pull requests targeting 'master'
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Set up JDK (Java 11 in this case, adjust to your version)
+      # Set up JDK 17
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -32,11 +32,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      # Install Gradle (if you want to ensure the specific version)
-      - name: Set up Gradle
-        uses: gradle/wrapper-validation-action@v1
-
-      # Run Gradle build (and tests)
-      - name: Build and test with Gradle
+      # Run Gradle build (clean and build)
+      - name: Build with Gradle
         run: ./gradlew clean build
-
