@@ -23,7 +23,7 @@ jobs:
         with:
           java-version: 17
           java-package: jdk
-          distribution: 'adoptopenjdk'  # You can change to 'zulu', 'oracle', etc.
+          distribution: 'temurin'  # You can change to 'zulu', 'oracle', etc.
           check-latest: false
           server-id: github
           server-username: GITHUB_ACTOR
