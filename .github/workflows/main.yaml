@@ -3,10 +3,10 @@ name: CI Pipeline for Multi-Module Gradle Project
 on:
   push:
     branches:
-      - main  # Trigger the pipeline for pushes to the 'main' branch
+      - master  # Trigger the pipeline for pushes to the 'main' branch
   pull_request:
     branches:
-      - main  # Trigger the pipeline for pull requests targeting 'main'
+      - master  # Trigger the pipeline for pull requests targeting 'main'
 
 jobs:
   build:
